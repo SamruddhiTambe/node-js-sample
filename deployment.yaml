@@ -18,5 +18,5 @@ spec:
       - name: my-app
         image: samruddhitambe/node-js-sample:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 3000
 
