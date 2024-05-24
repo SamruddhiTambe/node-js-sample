@@ -44,7 +44,7 @@ Installed Argo Rollouts in the Kubernetes cluster by applying the provided manif
 
 To clean up the resources created during the assignment, follow these steps:
 1. Delete the Argo CD and Argo Rollouts installations:
-   
+   ```
    kubectl delete namespace argocd
    kubectl delete namespace argo-rollouts
    kubectl delete -f deployment.yaml
