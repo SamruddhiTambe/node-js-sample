@@ -3,7 +3,7 @@
   "kind": "Application",
   "metadata": {
     "name": "my-app",
-    "namespace": "argocd" // Ensure this matches your Argo CD namespace
+    "namespace": "argocd"
   },
   "spec": {
     "source": {
