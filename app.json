@@ -6,8 +6,7 @@
   },
   "spec": {
     "source": {
-      "repoURL": "https://github.com/SamruddhiTambe/node-js-sample.git",
-      "path": "kubernetes-manifests"
+      "repoURL": "https://github.com/SamruddhiTambe/node-js-sample.git"
     },
     "destination": {
       "server": "https://kubernetes.default.svc",
