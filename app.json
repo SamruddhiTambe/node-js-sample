@@ -2,15 +2,19 @@
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "Application",
   "metadata": {
-    "name": "my-app"  // Replace this with the desired application name
+    "name": "my-app",
+    "namespace": "argocd" 
   },
   "spec": {
     "source": {
-      "repoURL": "https://github.com/SamruddhiTambe/node-js-sample.git"
+      "repoURL": "https://github.com/SamruddhiTambe/node-js-sample.git",
+      "path": ".",
+      "targetRevision": "HEAD"
     },
     "destination": {
       "server": "https://kubernetes.default.svc",
       "namespace": "default"
-    }
+    },
+    "project": "default"
   }
 }
