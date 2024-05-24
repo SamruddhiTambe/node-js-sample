@@ -1,44 +1,52 @@
-### This repository is no longer maintained!
+# DevOps/MLOps Internship Assignment Documentation
 
-**For the most up to date test app to get you started on Heroku, head on over to [`node-js-getting-started`](https://github.com/heroku/node-js-getting-started).**
+This documentation provides a detailed overview of the steps taken to complete the DevOps Internship Assignment, which involved setting up a GitOps pipeline using Argo CD and Argo Rollouts for deploying and managing a simple web application on Kubernetes.
 
----
+## Setup and Configuration
 
-# node-js-sample
+### Docker Installation:
+Followed the instructions provided [here](https://tecadmin.net/installing-docker-on-windows/) to install Docker on Windows.
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+### Kubectl Installation:
+Installed Kubectl using Chocolatey package manager as per the instructions [here](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools).
 
-## Running Locally
+### Minikube Installation:
+Installed Minikube using Chocolatey and started the cluster. Detailed steps can be found [here](https://minikube.sigs.k8s.io/docs/start/).
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+### Argo CD Installation:
+Installed Argo CD on the Kubernetes cluster using the manifests provided in the official documentation [here](https://argo-cd.readthedocs.io/en/stable/getting_started/#1-install-argo-cd), [here](https://youtu.be/ZXOwXi_SG0A?si=hURurkh3NkQtOyav)
 
-```sh
-git clone git@github.com:heroku/node-js-sample.git # or clone your own fork
-cd node-js-sample
-npm install
-npm start
-```
+### Argo CD CLI Installation:
+Downloaded and installed the Argo CD CLI on Windows using PowerShell commands. Instructions can be found [here](https://argo-cd.readthedocs.io/en/stable/cli_installation/).
+- [here](https://youtu.be/35Qimb_AZ8U?si=Lbv-SZ5JUffBBbkM)
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+### Argo Rollouts Installation:
+Installed Argo Rollouts in the Kubernetes cluster by applying the provided manifests. Executed the commands mentioned [here](https://github.com/argoproj/argo-rollouts#installation).
 
-## Deploying to Heroku
+## Deployment Process
 
-```
-heroku create
-git push heroku master
-heroku open
-```
+1. Cloned the repository containing a sample Node.js web application from [here](https://github.com/heroku/node-js-sample.git).
+2. Set up Dockerfile to containerize the Node.js application.
+3. Built and pushed the Docker image to Docker Hub.
+4. Created Kubernetes manifests (deployment.yaml and service.yaml) to deploy the application.
+5. Pushed the Kubernetes manifests to the GitHub repository.
+6. Created an Argo CD application to monitor the GitHub repository and automatically deploy changes to the Kubernetes cluster.
+7. Implemented a canary release strategy using Argo Rollouts by defining a rollout.yaml manifest and updating the Docker image version.
+8. Monitored the rollout process using `kubectl argo rollouts get rollout my-app -w`.
 
-Alternatively, you can deploy your own copy of the app using the web-based flow:
+## Challenges Encountered
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+- Initially faced issues while setting up Minikube due to conflicts with existing dependencies. Resolved by cleaning up the environment and reinstalling Minikube.
+- Had difficulty logging into Argo CD using the initial password. Followed the documentation to retrieve the password and successfully logged in.
+- Encountered issues with image versions during the canary release setup. Resolved by carefully updating the rollout.yaml manifest.
 
-## Documentation
+## Clean Up
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [10 Habits of a Happy Node Hacker](https://blog.heroku.com/archives/2014/3/11/node-habits)
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+To clean up the resources created during the assignment, follow these steps:
+1. Delete the Argo CD and Argo Rollouts installations:
+   
+   kubectl delete namespace argocd
+   kubectl delete namespace argo-rollouts
+   kubectl delete -f deployment.yaml
+   kubectl delete -f service.yaml
+   kubectl delete -f rollout.yaml
