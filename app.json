@@ -2,7 +2,7 @@
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "Application",
   "metadata": {
-    "name": "my-app"
+    "name": "my-app"  // Replace this with the desired application name
   },
   "spec": {
     "source": {
