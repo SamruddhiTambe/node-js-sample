@@ -3,12 +3,12 @@
   "kind": "Application",
   "metadata": {
     "name": "my-app",
-    "namespace": "argocd" 
+    "namespace": "argocd" // Ensure this matches your Argo CD namespace
   },
   "spec": {
     "source": {
       "repoURL": "https://github.com/SamruddhiTambe/node-js-sample.git",
-      "path": ".",
+      "path": "manifests",
       "targetRevision": "HEAD"
     },
     "destination": {
